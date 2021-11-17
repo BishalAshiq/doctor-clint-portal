@@ -17,7 +17,7 @@ const Appointments = ({date}) => {
         fetch(url)
         .then (res=> res.json())
         .then(data=> setAppointments(data))
-    },[date])
+    },[date]);
     return (
         <div>
             <h2>Appointments{appointments.length}</h2>

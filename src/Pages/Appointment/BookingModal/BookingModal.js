@@ -22,13 +22,13 @@ const style = {
 
 
 const BookingModal = ({openBooking, handleBookingClose, booking, date, setBookingSuccess}) => {
-    const{name, time} = booking;
+    const{name, time, price} = booking;
     const {user} = useAuth(); 
-    const initializeInfo = {patientName: user.displayName, email: user.email, phone:''} 
-    const [bookingInfo, setBookingInfo]= useState({initializeInfo});
+    const initialInfo = {patientName: user.displayName, email: user.email, phone:''} 
+    const [bookingInfo, setBookingInfo]= useState({initialInfo});
     
     const handleOnBlur = e =>{
-    const field = e.target.value;
+    const field = e.target.name;
     const value = e.target.value;
     const newInfo = {...bookingInfo};
     newInfo[field] = value;
@@ -40,10 +40,11 @@ const BookingModal = ({openBooking, handleBookingClose, booking, date, setBookin
       const appointment = {
         ...bookingInfo,
         time,
+        price,
         serviceName: name,
         date: date.toLocaleDateString()
       }
-
+      console.log(appointment)
     // Send to the Server 
       fetch('http://localhost:5000/appointments',{
         method:'Post',
@@ -61,9 +62,6 @@ const BookingModal = ({openBooking, handleBookingClose, booking, date, setBookin
       })
         e.preventDefault();
     }
-
-    
-
     return (
         <Modal
         aria-labelledby="transition-modal-title"

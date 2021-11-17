@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import initializeAuthentication from "../Pages/Login/Login/Firebase/firebase.init";
-import { getAuth, createUserWithEmailAndPassword, signOut, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile  } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signOut, onAuthStateChanged, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile } from "firebase/auth";
 
 initializeAuthentication();
 
@@ -14,7 +14,6 @@ const useFirebase = ()=>{
 
  const registerUser=(email, password, name, history)=>{
      setIsLoading(true);
-     console.log(email);
      createUserWithEmailAndPassword(auth, email, password) 
      .then((userCredential) => {
         setAuthError('');
@@ -45,7 +44,7 @@ const useFirebase = ()=>{
         setAuthError('');
     })
     .catch((error) => {
-        setAuthError(error.message);
+        setAuthError(error.message); 
     }) 
     .finally(() => setIsLoading(false));
 }
@@ -100,8 +99,6 @@ const useFirebase = ()=>{
       body: JSON.stringify(user)
     })
   }
-
-
  return{
      user,
      isLoading,
