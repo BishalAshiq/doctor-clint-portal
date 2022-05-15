@@ -1,6 +1,6 @@
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route
 } from "react-router-dom";
 import './App.css';
@@ -17,26 +17,20 @@ function App() {
     <div className="App">
      <AuthProvider>
      <Router>
-       <Switch>
-       <PrivateRoute path="/appointment">
-           <Appointment/>
-         </PrivateRoute>
-       <PrivateRoute path="/dashBoard">
-           <Dashboard/>
-         </PrivateRoute>
-         <Route exact path="/">
-           <Home></Home>
+       <Routes>
+       <Route path="/appointment" element={<PrivateRoute><Appointment/></PrivateRoute>}>
+         </Route>
+       <Route path="/dashBoard" element={<PrivateRoute><Dashboard/></PrivateRoute>}>
+         </Route>
+         <Route exact path="/" element={<Home/>}>
          </Route> 
-         <Route path="/home">
-           <Home></Home>
+         <Route path="/home" element={<Home/>}>
          </Route>  
-         <Route path="/login">
-           <Login></Login>
+         <Route path="/login" element={<Login/>}>
          </Route>
-         <Route path="/register">
-           <Register></Register>
+         <Route path="/register" element={<Register/>}>
          </Route>
-       </Switch>
+       </Routes>
      </Router>
      </AuthProvider>
     </div>
